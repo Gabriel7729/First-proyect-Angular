@@ -10,8 +10,8 @@
 
 <br>
 
-<section class="container-fluid">
-
+<section class="container mt-8">
+  <hr>
   <h1 class="text-center">Prueba Databinding</h1>
   <hr>
 
@@ -24,19 +24,69 @@
   </div>
 </div>
 
-<br>
 
-<h1 class="text-center">Prueba Property Binding</h1>
+<hr>
+<h1 class="text-center">Prueba Property Binding and Data Binding</h1>
 <hr>
 
 <div class="row">
   <div class="col-md-6">
-    <label for="Algo">Escriba algo:</label>
-    <input class="form-control" type="text" id="Algo" [placeholder]="EscribaAlgo" [disabled]="desabilitado">
+
+    <h4>Input con Cuenta atras...</h4>
+
+    <label for="Algo">Escriba algo en el primer texto:</label>
+    <input class="form-control" type="text" [placeholder]="EscribaAlgo" [disabled]="desabilitado" [(ngModel)]="text1">
     <span><small>{{textInput}}{{num}}</small></span>
+
+    <br>
+
+    <label for="Algo">Escriba algo en el segundo texto:</label>
+    <input class="form-control" type="text" [placeholder]="EscribaAlgo" [disabled]="desabilitado" [(ngModel)]="text2">
+    <span><small>{{textInput}}{{num}}</small></span>
+
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-center">
+    <h4>Button using Databinding</h4>
+
+    <p>{{text1}}</p>
+
+    <button class="btn btn-primary" (click)="IntercambiarTextos()">Intercambiar textos</button>
+    <br><br>
+    <p>{{text2}}</p>
+    <br><br>
   </div>
 </div>
+
+<hr>
+<h1 class="text-center">Uso de la Directiva *ngFor, *ngIf, ngClass</h1>
+<hr>
+
+<div>
+  <h3>Tabla de Estudiantes</h3> 
+  <button class="btn btn-info ml-auto" (click)="Mostrar()">Mostrar Estudiantes</button>
+  <br><br>
+  <table class="table table-bordered table-hover text-center" *ngIf="MostrarEstudiantes">
+    <thead class="bg-dark" style="color:white;">
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Calificacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of ListaEstudiantes; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{student.Nombre}}</td>
+        <td>{{student.Apellido}}</td>
+        <td>
+          <span [ngClass]="student.NotaFinal >= 80 ? 'badge bg-success' : 'badge bg-danger' ">{{student.NotaFinal}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </section>
+<br><br>
